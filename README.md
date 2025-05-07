@@ -39,6 +39,8 @@
 
   ### Visualizar
   ```
+  kubectl get secrets
+
   kubectl get pods,deployment,svc
   
   kubectl get deployment,svc -l app=contact-api
@@ -55,6 +57,8 @@
   kubectl delete deployment/api-gateway
   
   kubectl delete deployment,svc -l app=contact-api
+
+  kubectl delete configmaps --all
   
   # Editar sem rebuildar a imagem
   kubectl edit configmap api-gateway-config
