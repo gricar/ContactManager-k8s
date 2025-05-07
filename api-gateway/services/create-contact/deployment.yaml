@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: create-contact
+  labels:
+    app: contact-api
+    service: create
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contact-api
+      service: create
+  template:
+    metadata:
+      labels:
+        app: contact-api
+        service: create
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - name: create-contact
+          image: gricardo10/create-contact-api:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: create-contact-config
+                  key: AppEnv
+            - name: ConnectionStrings__Database
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: connectionString
+            - name: ConnectionStrings__RabbitMq
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: connectionString
