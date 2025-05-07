@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: mssql
   labels:
-    app: contact-db
+    app: contact-api
+    service: database
 spec:
   replicas: 1
   selector:

@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: rabbitmq
   labels:
-    app: rabbitmq
+    app: contact-api
+    service: rabbitmq
 spec:
   replicas: 1
   selector:
