@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-persistence
+  labels:
+    app: contact-api
+    service: persistence
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contact-persistence
+  template:
+    metadata:
+      labels:
+        app: contact-persistence
+    spec:
+      containers:
+      - name: contact-persistence
+        image: gricardo10/contact-persistence:1.0.0
+        env:
+          - name: ConnectionStrings__Database
+            valueFrom:
+              configMapKeyRef:
+                name: db-config
+                key: connectionString
+          - name: MessageBroker__Host
+            valueFrom:
+              configMapKeyRef:
+                name: rabbitmq-config
+                key: messageBrokerHost
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
