@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delete-contact
+  labels:
+    app: contact-api
+    service: delete
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contact-api
+      service: delete
+  template:
+    metadata:
+      labels:
+        app: contact-api
+        service: delete
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - name: delete-contact
+          image: gricardo10/delete-contact-api:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: delete-contact-config
+                  key: AppEnv
+            - name: ConnectionStrings__Database
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: connectionString
+            - name: ConnectionStrings__RabbitMq
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: connectionString
