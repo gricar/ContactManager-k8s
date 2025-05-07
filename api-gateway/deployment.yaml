@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  labels:
+    app: contact-api
+    service: gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contact-api
+      service: gateway
+  template:
+    metadata:
+      labels:
+        app: contact-api
+        service: gateway
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - name: contact-api-gateway
+          image: gricardo10/contact-api-gateway:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ReverseProxy__Clusters__create-api-cluster__Destinations__http-destination__Address
+              valueFrom:
+                configMapKeyRef:
+                  name: api-gateway-config
+                  key: CreateClusterAddress
+            - name: ReverseProxy__Clusters__delete-api-cluster__Destinations__http-destination__Address
+              valueFrom:
+                configMapKeyRef:
+                  name: api-gateway-config
+                  key: DeleteClusterAddress
+            - name: ReverseProxy__Clusters__update-api-cluster__Destinations__http-destination__Address
+              valueFrom:
+                configMapKeyRef:
+                  name: api-gateway-config
+                  key: UpdateClusterAddress
