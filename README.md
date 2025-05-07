@@ -25,7 +25,10 @@
   
   ### Criar os Microserviços
   ```
-  kubectl apply -f .\api-gateway\services
+  kubectl apply -f .\api-gateway\services\create-contact
+  kubectl apply -f .\api-gateway\services\delete-contact
+  kubectl apply -f .\api-gateway\services\update-contact
+  kubectl apply -f .\api-gateway\services\persistence-contact
   ```
   
   ### Criar a API Gateway
