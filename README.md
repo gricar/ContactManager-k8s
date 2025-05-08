@@ -44,6 +44,8 @@
   ```
   kubectl get secrets
 
+  kubectl get pv,pvc
+
   kubectl get pods,deployment,svc
   
   kubectl get deployment,svc -l app=contact-api
