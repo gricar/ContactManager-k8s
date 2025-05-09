@@ -4,3 +4,4 @@ metadata:
   name: rabbitmq-config
 data:
   connectionString: "amqp://rabbitmq-svc:5672"
+  messageBrokerHost: "rabbitmq-svc"
