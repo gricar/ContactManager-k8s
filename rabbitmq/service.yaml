@@ -4,6 +4,9 @@ metadata:
   name: rabbitmq-svc
   labels:
     app: contact-api
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "15692"
 spec:
   selector:
     app: rabbitmq
@@ -19,3 +22,8 @@ spec:
       port: 15672
       targetPort: 15672
       nodePort: 31672
+    - name: metrics
+      protocol: TCP
+      port: 15692
+      targetPort: 15692
+      nodePort: 31692
