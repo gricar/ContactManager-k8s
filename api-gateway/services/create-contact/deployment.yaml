@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: create-contact
-          image: gricardo10/create-contact-api:1.0.0
+          image: gricardo10/create-contact-api:1.0.1
           ports:
             - containerPort: 8080
           env:
@@ -41,3 +41,11 @@ spec:
                 configMapKeyRef:
                   name: rabbitmq-config
                   key: connectionString
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
