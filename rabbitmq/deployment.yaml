@@ -46,7 +46,14 @@ spec:
               httpHeaders:
                 - name: Authorization
                   value: Basic Z3Vlc3Q6Z3Vlc3Q= # base64(guest:guest)
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

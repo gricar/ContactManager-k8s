@@ -16,10 +16,6 @@ spec:
       labels:
         app: contact-api
         service: gateway
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
-        prometheus.io/path: "/metrics"
     spec:
       containers:
         - name: contact-api-gateway
@@ -42,3 +38,18 @@ spec:
                 configMapKeyRef:
                   name: api-gateway-config
                   key: UpdateClusterAddress
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 35
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"

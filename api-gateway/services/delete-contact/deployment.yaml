@@ -16,13 +16,10 @@ spec:
       labels:
         app: contact-api
         service: delete
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
     spec:
       containers:
         - name: delete-contact
-          image: gricardo10/delete-contact-api:1.0.0
+          image: gricardo10/delete-contact-api:1.0.1
           ports:
             - containerPort: 8080
           env:
@@ -41,3 +38,18 @@ spec:
                 configMapKeyRef:
                   name: rabbitmq-config
                   key: connectionString
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
