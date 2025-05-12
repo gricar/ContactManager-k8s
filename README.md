@@ -16,19 +16,25 @@
   kubectl apply -f .\mssql\secret.yaml
   kubectl apply -f .\mssql
   ```
-  
+
   ### Criar o RabbitMQ
   ```
   kubectl apply -f .\rabbitmq\secret.yaml
   kubectl apply -f .\rabbitmq
   ```
-  
+
+  ### Criar a Observabilidade
+  ```
+  kubectl apply -f .\observability\prometheus
+  kubectl apply -f .\observability\grafana
+  ```
+
   ### Criar os Microserviços
   ```
+  kubectl apply -f .\api-gateway\services\persistence-contact
   kubectl apply -f .\api-gateway\services\create-contact
   kubectl apply -f .\api-gateway\services\delete-contact
   kubectl apply -f .\api-gateway\services\update-contact
-  kubectl apply -f .\api-gateway\services\persistence-contact
   ```
   
   ### Criar a API Gateway
