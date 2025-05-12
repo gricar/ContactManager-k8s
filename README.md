@@ -5,14 +5,10 @@
 
 <details>
   <summary><strong>Inicializar os pods</strong></summary>
-
-  ### Criar o volume
-  ```
-  kubectl apply -f .\volumes
-  ```
-  
+ 
   ### Criar o Banco de Dados
   ```
+  kubectl apply -f .\mssql\pvc.yaml
   kubectl apply -f .\mssql\secret.yaml
   kubectl apply -f .\mssql
   ```
@@ -25,7 +21,9 @@
 
   ### Criar a Observabilidade
   ```
+  kubectl apply -f .\observability\prometheus\pvc.yaml
   kubectl apply -f .\observability\prometheus
+  kubectl apply -f .\observability\grafana\pvc.yaml
   kubectl apply -f .\observability\grafana
   ```
 
