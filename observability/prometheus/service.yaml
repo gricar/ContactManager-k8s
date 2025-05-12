@@ -3,7 +3,8 @@ kind: Service
 metadata:
   name: prometheus-svc
   labels:
-    app: contact-api
+    app: prometheus
+    service: observability
 spec:
   type: NodePort
   selector:

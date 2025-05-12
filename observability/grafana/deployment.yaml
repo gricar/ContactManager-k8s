@@ -3,17 +3,19 @@ kind: Deployment
 metadata:
   name: grafana
   labels:
-    app: contact-api
+    app: grafana
     service: observability
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: grafana
+      service: observability
   template:
     metadata:
       labels:
         app: grafana
+        service: observability
     spec:
       containers:
         - name: grafana
@@ -27,3 +29,10 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+      volumes:
+      - name: grafana-storage
+        persistentVolumeClaim:
+          claimName: grafana-storage
