@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: api-gateway-config
 data:
-  CreateClusterAddress: "http://create-contact-svc:80"
-  DeleteClusterAddress: "http://delete-contact-svc:80"
-  UpdateClusterAddress: "http://update-contact-svc:80"
+  CreateClusterAddress: "http://create-contact-svc:8080"
+  DeleteClusterAddress: "http://delete-contact-svc:8080"
+  UpdateClusterAddress: "http://update-contact-svc:8080"
