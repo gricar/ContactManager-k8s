@@ -6,7 +6,7 @@ metadata:
     app: contact-api
     service: create
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: contact-api
