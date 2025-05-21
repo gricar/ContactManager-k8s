@@ -11,8 +11,7 @@
  
   ### Criar o Banco de Dados
   ```
-  kubectl apply -f .\mssql\pvc.yaml
-  kubectl apply -f .\mssql\secret.yaml
+  kubectl apply -f .\mssql\pvc.yaml -f .\mssql\secret.yaml
   kubectl apply -f .\mssql
   ```
 
@@ -33,7 +32,7 @@
   ### Criar os Microserviços
   ```
   kubectl apply -f .\api-gateway\services\persistence-contact
-  kubectl apply -f .\api-gateway\services\create-contact
+  kubectl apply -f .\api-gateway\services\create-contact\secret.yaml -f .\api-gateway\services\create-contact
   kubectl apply -f .\api-gateway\services\delete-contact
   kubectl apply -f .\api-gateway\services\update-contact
   ```
